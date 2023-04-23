@@ -1,0 +1,31 @@
+html {
+  background-color: fafafa;
+}
+body, h1, h2, h3, h4, h5, h6, p, blockquote {
+  margin: 0;
+}
+ul li {
+  list-style: none;
+}
+th {
+  font-weight: normal;
+}
+
+blockquote {
+  border-left: 2px solid black;
+  padding: 4px;
+  padding-left: 8px;
+}
+
+pre {
+  background: #fcfaee;
+}
+
+code {
+  background-color: #eeeeee;
+  color: brown;
+  padding: 4px;
+  font-weight: bold;
+  font-family: monospace;
+  border-radius: 2px;
+}

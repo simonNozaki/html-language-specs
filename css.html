@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML basic markups </title>
+    <meta charset="utf-8">
+    <meta http-equiv="Refresh" content="5">
+    <!-- name属性で任意のメタ情報 -->
+    <meta name="description" content="マークアップ言語の仕様に詳しくなります">
+    <meta name="view-port" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>参考</h2>
+        <ul>
+          <li><a href="https://momdo.github.io/css2/Overview.html" target="_blank">Cascading Stylesheet Level 2 Rivision 2 Specification</a></li>
+          <li><a href="./index.html">HTMLの仕様</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>css 2.2 specification</h1>
+      <section>
+        <h2>視覚整形モデル(Visual Formatting Model)</h2>
+        <p>文書内ボックスのレイアウトは以下の要素により決まる:</p>
+        <ul>
+          <li>ボックスの次元、種類</li>
+          <li>位置決めスキーム</li>
+          <li>要素間の関係</li>
+          <li>外部情報(ビューポートなど)</li>
+        </ul>
+        <section>
+          <h3>ブロックの生成制御</h3>
+          <p>ブロックの生成は<code>display</code>プロパティにより与えられる。 <code>block</code> や <code>inline</code> でボックスの種類を制御できる </p>
+        </section>
+        <section>
+          <h3>ボックスの位置</h3>
+          ボックスの位置は3つの位置決めスキームにより決定される。
+          <ul>
+            <li>通常フロー: 何も指定しない場合はこれ。</li>
+            <li>浮動(float): フローに従ってレイアウトされたあと取り出され、限りなく左 or 右にシフトする</li>
+            <li>絶対位置</li>
+          </ul>
+          <code>position</code>プロパティにstatic以外が明示的に指定される場合、"位置していされた"という。
+        </section>
+        <section>
+          <h3>通常フロー</h3>
+          通常フローにおけるボックスは整形コンテキストに属しており、テーブルやインライン、ブロックである。
+          <section>
+            <h4>ブロック整形コンテキスト</h4>
+            ブロックレベルボックスはブロック整形コンテキストに、インラインレベルボックスはインライン整形コンテキストに属す。
+            <ul>
+              <li>位置指定された要素、ブロックコンテナ(<code>inline-block</code>など)、ブロックボックスは新しい整形コンテキストを生成する。</li>
+              <li>ブロック整形コンテキストでは、要素が上から順番に並べられる。</li>
+            </ul>
+          </section>
+          <section>
+            <h4>インライン整形コンテキスト</h4>
+            インライン整形コンテキストは、ブロックレベル要素を持たないブロックコンテナボックスにより生成される整形コンテキスト。行を形成する長方形を<code>line box</code>と呼ぶ。
+            <ul>
+              <li>ブロック整形コンテキストと異なり、要素は左から横に順番に並べられる。</li>
+              <li>行ブロックにおける縦および横方向の並びは<code>vertical-align</code>、<code>text-align</code>で制御される。</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h3>浮動</h3>
+          <code>float</code> は絶対位置指定ではない要素にのみ指定されうる。
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

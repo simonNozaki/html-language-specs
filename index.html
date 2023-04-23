@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- htmlにheadとbodyが一つずつ -->
+<html>
+  <head>
+    <title>HTML basic markups </title>
+    <!-- meta: Nothing -->
+    <meta charset="utf-8">
+    <!-- http-equivで、httpレスポンスヘッダと同じ情報を指定できる -->
+    <meta http-equiv="Refresh" content="3">
+    <!-- name属性で任意のメタ情報 -->
+    <meta name="description" content="マークアップ言語の仕様に詳しくなります">
+    <meta name="view-port" content="width=device-width, initial-scale=1">
+    <!-- styleはbodyには存在できない -->
+    <style>
+    </style>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
+            <li><a href="https://www.amazon.co.jp/gp/product/4862465277/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1">HTML解体新書-仕様から紐解く本格入門</a></li>
+            <li><a href="https://developer.mozilla.org/ja/docs/Glossary/IDL">IDL</a></li>
+            <li><a href="./css.html">CSSの仕様</a></li>
+          </ul>
+        </nav>
+      </header>
+      <h1>htmlの言語仕様 メモ</h1>
+      <section>
+        <p>sectionには見出しを含めます。見出しを持たせないような囲みであれば、divで囲って代用します。</p>
+      </section>
+      <section>
+        <h2>ブロックレベル要素とインラインレベル要素</h2>
+        <p>
+          ブロックレベル要素、インラインレベル要素はCSSの視覚要素レベルで、cssの <a href="https://momdo.github.io/css2/visuren.html">視覚整形モデル</a> とHTMLの内容モデルは本質的に異なる概念。
+          HTML5でレベル分類が一新され、HTML4でインライン要素とされていたものはPhrasingコンテンツとなった。ブロックレベル要素とされていたものはFlowコンテンツに相当するものの、
+          FlowやPhrasingも含むため1:1に対応しない。
+        </p>
+      </section>
+      <section>
+        <h2>htmlの主要な要素</h2>
+        <section>
+          <h3>グルーピング</h3>
+          <p>blockquoteはFlowコンテンツで、文字をそのまま置くこともできる。pで囲った文字列をそのまま置くこともできる。</p>
+          <blockquote>
+            別のソースから引用されたセクションがここに表示されます。
+          </blockquote>
+          <section>
+            <h4>整形済みテキスト</h4>
+            <p>preは改行やスペースをそのまま維持した、整形済みテキストとして表示する。</p>
+            <pre>
+              ul li {
+                list-style: none;
+              }
+            </pre>
+          </section>
+          <section>
+            <h4>列挙</h4>
+            <ol>
+              <li>ol、ulは自身とliのみ子要素になれる</li>
+              <li>ol, ulは空でもよい</li>
+              <li>liはFlowコンテンツ。他のFlowコンテンツないしはPhrasingコンテンツを含むことができる。</li>
+            </ol>
+          </section>
+          <section>
+            <H4>main要素</H4>
+            <p>mainはその性質上、bodyに一つだけ存在することを想定した要素。hiddenで隠せば複数置くことができ、jsなどでmainの出し分けを行うユースケースを考えられる。mainはbodyの直下に置くこと。</p>
+          </section>
+          <section>
+            <h4>div</h4>
+            <div>
+              <p>divに特別な意味を持たないFlowコンテンツ。主にスタイルやレイアウトのために付与する使い方がある。</p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <h3>テキストレベルセマンティクス</h3>
+          <p>テキストレベルセマンティクスはテキストをマークアップする用途で用いられ、すべてPhrasing contents。</p>
+          <section>
+            <h4>テキストマークアップの要素</h4>
+            <ul>
+              <li><strong>太文字にする</strong></li>
+              <li><em>強調</em></li>
+              <li><small>小さい文字にする</small></li>
+              <li><s>取り消し線</s></li>
+              <li><abbr title="HyperText Markup Language">HTML</abbr></li>
+              <li><time>2023-04-23T10:00:00</time></li>
+              <li>特に重要ではないけど太くしたいテキストには<b>b要素</b>を使う。</li>
+              <li><i>u要素</i>を使えば下線がつきます。アクセシビリティを考えると、色以外によるリンクの見分けをしたいので可能なら使わない。</li>
+              <li>spanは、divと同じく特別な意味を持たない要素。他に有効なマークアップがないときに用いる。</li>
+              <li>
+                <pre>
+                  <code>
+                    const lazyMap = (arr, f) => {
+                      return () => (f)
+                    }
+                  </code>
+                </pre>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h3>リンク関連</h3>
+          <section>
+            <h4>a</h4>
+            <p>内容モデルはtransparent。親要素の内容モデルを引き継ぐので、divの子要素になっていればFlowコンテンツのように振る舞う。</p>
+            <pre>
+              <code>
+                &lt;div&gt;
+                  &lt;a&gt;
+                    &lt;h1&gt; 見出しでもクリックできる &lt;/h1&gt;
+                  &lt;/a&gt;
+                &lt;/div&gt;
+              </code>
+            </pre>
+            <p>
+              ウェブにおけるリンクは重要度が高い。そのためリンク要素のアクセシビリティには十分留意すること。
+            </p>
+            <ul>
+              <li>リンク先が推測できること e.g. "こちら" を避ける(here症候群)</li>
+              <li>リンクボタンはあくまでリンクなので、支援技術は "リンク" として認識する。</li>
+            </ul>
+          </section>
+          <section>
+            <h4>link要素</h4>
+            <ul>
+              <li>
+                linkはaと異なり、html文書が参照するリソースとの関係を表現する要素。リンク先リソースの種類はrel属性で指定される。
+              </li>
+              <li>
+                使用できる文字列表現は<a href="https://momdo.github.io/html/links.html#linkTypes">HTMLリンクタイプ</a>に定義される。
+              </li>
+              <li>
+                多くの場合、relはhrefと一緒に用いてリンク先の実体とそれの種類を設定する。
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h3>テーブル</h3>
+          <p>
+            tableの内容モデルは複雑。thead, tbodyなどを子要素にできる。trを直接配置できるが、tbodyが補われる。
+          </p>
+          <section>
+            <h4>tr</h4>
+            <p>テーブルの行を表現する。内容モデルはtd, thのみ。td, thはどちらもFlowモデル。ただしthの子孫にheader, 見出しを含められない。</p>
+            <table>
+              <caption>キャプションは省略しても良い。</caption>
+              <thead>
+                <tr>
+                  <th>変更日</th>
+                  <th>商品名</th>
+                  <th>在庫数</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><time>2023-04-23</time></th>
+                  <th>商品1</th>
+                  <th>50</th>
+                </tr>
+                <tr>
+                  <th><time>2023-04-23</time></th>
+                  <th>商品2</th>
+                  <th>70</th>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h4>caption</h4>
+            <p>テーブルにキャプションをつける。省略可能。</p>
+          </section>
+        </section>
+        <section>
+          <h3>フォーム</h3>
+          <p>ユーザが入力した情報をサーバに送信する機能があり、そのための要素が存在する。ユーザがテキストを入力するパーツをフォームコントロールと呼ぶ。</p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
