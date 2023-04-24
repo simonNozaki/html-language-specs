@@ -33,11 +33,38 @@
           <li>外部情報(ビューポートなど)</li>
         </ul>
         <section>
-          <h3>ブロックの生成制御</h3>
-          <p>ブロックの生成は<code>display</code>プロパティにより与えられる。 <code>block</code> や <code>inline</code> でボックスの種類を制御できる </p>
+          <h3>ボックスの生成制御</h3>
+          <p>cssで生成されるボックスは、視覚整形モデルにおける振る舞いに影響を与える。ボックスの生成は<code>display</code>プロパティにより与えられる。 <code>block</code> や <code>inline</code> でボックスの種類を制御できる </p>
+          <p>displayプロパティの値から、子孫ボックスおよび生成されたコンテンツを含む主ボックス(<code>pricipal box</code>)が生成される。</p>
+          <section>
+            <h4>ブロックレベル要素</h4>
+            <ul>
+              <li>ブロックレベル要素(Block-level-elements)はparagraphのようなブロックとして視覚的に整形され、(formatted visually)ブロックレベル主ボックスを生成する。</li>
+              <li>テーブルなどでない限りブロックレベルボックスはブロックコンテナボックスでもある。</li>
+              <li>ブロックレベルボックス、ブロックコンテナボックス、ブロックボックスは曖昧に"ブロック"と呼ばれる。</li>
+            </ul>
+            以下のケースでは、<code>div</code>に<code>p</code>とプレーンテキストが含まれている。整形の定義を容易にする目的で、そのようなテキストには匿名ブロックボックスがあるものとする。
+            (9.2.1.1)
+            <pre>
+                &lt;div&gt;
+                  <!-- ここに匿名ブロックボックス -->
+                  plain text
+                  &lt;p&gt;pararaph&lt;/p&gt;
+                &lt;/div&gt;
+            </pre>
+          </section>
+          <section>
+            <h4>インラインレベル要素(inline-level elements)</h4>
+            <p>新たな内容のブロックを形成しない。<code>display</code>とinline, inline-block, inline-tableにした場合すべてインラインレベル要素になる。</p>
+            <p>インラインレベル要素はインライン整形コンテキストに属する<strong>インラインレベルボックス</strong>を生成する。</p>
+            ブロックレベルボックス同様、インラインレベルボックスも無名インラインボックスを形成する。以下の例ではemに囲まれていないテキストはインライン要素となる。(9.2.2.1)
+            <pre>
+              &lt;p&gt;This is in &lt;em&gt;inline box&lt;/em&gt;.&lt;/p&gt;
+            </pre>
+          </section>
         </section>
         <section>
-          <h3>ボックスの位置</h3>
+          <h3>ポジショニングスキーム</h3>
           ボックスの位置は3つの位置決めスキームにより決定される。
           <ul>
             <li>通常フロー: 何も指定しない場合はこれ。</li>
@@ -45,6 +72,10 @@
             <li>絶対位置</li>
           </ul>
           <code>position</code>プロパティにstatic以外が明示的に指定される場合、"位置していされた"という。
+        </section>
+        <section>
+          <h3>包含ブロック(Containing block)</h3>
+          <p>ボックスの位置と大きさは、"包含ブロック"と呼ばれる長方形の辺および位置により計算される。ただし、位置は包含ブロックに閉じ込められるわけではなく、<code>overflow</code>することもありうる。</p>
         </section>
         <section>
           <h3>通常フロー</h3>
