@@ -46,12 +46,10 @@
             以下のケースでは、<code>div</code>に<code>p</code>とプレーンテキストが含まれている。整形の定義を容易にする目的で、そのようなテキストには匿名ブロックボックスがあるものとする。
             (9.2.1.1)
             <pre>
-                &lt;div&gt;
-                  <!-- ここに匿名ブロックボックス -->
-                  plain text
-                  &lt;p&gt;pararaph&lt;/p&gt;
-                &lt;/div&gt;
-            </pre>
+&lt;div&gt;
+  plain text
+  &lt;p&gt;pararaph&lt;/p&gt;
+&lt;/div&gt;</pre>
           </section>
           <section>
             <h4>インラインレベル要素(inline-level elements)</h4>
@@ -59,8 +57,7 @@
             <p>インラインレベル要素はインライン整形コンテキストに属する<strong>インラインレベルボックス</strong>を生成する。</p>
             ブロックレベルボックス同様、インラインレベルボックスも無名インラインボックスを形成する。以下の例ではemに囲まれていないテキストはインライン要素となる。(9.2.2.1)
             <pre>
-              &lt;p&gt;This is in &lt;em&gt;inline box&lt;/em&gt;.&lt;/p&gt;
-            </pre>
+&lt;p&gt;This is in &lt;em&gt;inline box&lt;/em&gt;.&lt;/p&gt;</pre>
           </section>
         </section>
         <section>
@@ -90,7 +87,7 @@
           </section>
           <section>
             <h4>インライン整形コンテキスト</h4>
-            インライン整形コンテキストは、ブロックレベル要素を持たないブロックコンテナボックスにより生成される整形コンテキスト。行を形成する長方形を<code>line box</code>と呼ぶ。
+            インライン整形コンテキストは、ブロックレベル要素を持たないブロックコンテナボックスにより生成される整形コンテキスト。行を形成する長方形を<code>行ボックス</code>と呼ぶ。
             <ul>
               <li>ブロック整形コンテキストと異なり、要素は左から横に順番に並べられる。</li>
               <li>行ブロックにおける縦および横方向の並びは<code>vertical-align</code>、<code>text-align</code>で制御される。</li>
@@ -100,6 +97,51 @@
         <section>
           <h3>浮動</h3>
           <code>float</code> は絶対位置指定ではない要素にのみ指定されうる。
+        </section>
+      </section>
+      <section>
+        <h2>視覚整形モデル: 幅、マージン、高さ、並び</h2>
+        <section>
+          <h3>コンテンツの幅(width)</h3>
+          <ul>
+            <li>コンテンツの幅を指定する。非置換インライン要素、テーブル列と列グループを除く全要素に適用される。</li>
+              <ul>
+                <li>
+                  適用のルールは<code>max-width</code>、<code>min-width</code>も同様。
+                  <blockquote>
+                    CSS 2.2において、テーブル、インラインテーブル、テーブルセル、テーブル列、列グループ上の'min-width'および'max-width'の効果は未定義である。
+                  </blockquote>
+                </li>
+              </ul>
+            <li>非置換インライン要素とは、終了タグを持つインライン要素のことでspanやstrongなど: <a href="https://www.dspt.net/html_tag/base.html">HTMLの基本（タグの書き方と要素）</a></li>
+            <li>
+              包含ブロックに含まれる要素の幅は、要素の位置スキーム(positioning scheme)や置換 or not、およびfloatの有無により計算方法が変わる。
+              計算の詳細は<a href="https://momdo.github.io/css2/visudet.html#Computing_widths_and_margins">10.3 幅とマージンの計算</a>を参照。
+            </li>
+              <ul>
+                <li>よくある非置換ブロック要素(divやp、sectionなど)の幅は以下の式になる</li>
+                <blockquote>
+                  'margin-left' + 'border-left-width' + 'padding-left' + 'width' + 'padding-right' + 'border-right-width' + 'margin-right' = 包含ブロックの幅 
+                </blockquote>
+              </ul>
+          </ul>
+        </section>
+        <section>
+          <h3>コンテンツの高さ(height)</h3>
+          <section>
+            <ul>
+              <li>ボックスのコンテンツの高さを指定する。幅同様非置換インライン要素、テーブルには適用されない。</li>
+              <li>
+                ボックスの高さおよびマージンの計算は、幅同様計算アルゴリズムが存在する。
+                計算の詳細は<a href="https://momdo.github.io/css2/visudet.html#Computing_heights_and_margins">10.6 高さとマージンの計算</a>を参照のこと。
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h3>行の高さの計算(line-height, vertical-align)</h3>
+          インラインレベル要素のそれぞれに対してボックスの高さが計算され、<code>line-hight</code>になる。
+          インラインレベル要素は<code>vertical-align</code>要素により垂直方向に並びが決まる。
         </section>
       </section>
     </main>
