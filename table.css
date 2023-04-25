@@ -1,0 +1,28 @@
+@import "./style.css";
+
+table {
+  /* ブラウザでデフォルト2pxが入ってるので無効化 */
+  border-spacing: 0;
+  /* tableが入っているボックスいっぱいに広がる。 */
+  width: 100%;
+}
+
+th {
+  background-color: azure;
+}
+
+td {
+  border: 1px solid gray;
+}
+
+.table-container {
+  overflow-x: scroll;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+.max_w_10 {
+  max-width: 10rem;
+}

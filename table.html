@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML basic markups </title>
+    <meta charset="utf-8">
+    <meta http-equiv="Refresh" content="5">
+    <!-- name属性で任意のメタ情報 -->
+    <meta name="description" content="マークアップ言語の仕様に詳しくなります">
+    <meta name="view-port" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+    <link rel="stylesheet" href="./table.css">
+  </head>
+  <body>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>申請コード</th>
+            <th>承認ステータス</th>
+            <th>備考</th>
+            <th>申請日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>APY0000001</td>
+            <td>承認済み</td>
+            <td></td>
+            <td>2023-04-25</td>
+          </tr>
+          <tr>
+            <td>APY0000002</td>
+            <td>申請中</td>
+            <!-- thにいれても最大幅固定されないが、tdにつけると最大幅指定で固定となる -->
+            <td class="max_w_10">ときには備考がとても長いことがあります。それでも、レイアウトが崩れずにいたいものです。</td>
+            <td>2023-04-25</td>
+          </tr>
+          <tr>
+            <td>APY0000003</td>
+            <td>未承認</td>
+            <td class="max_w_10">This is very very very very very very very very very very very very long description</td>
+            <td>2023-04-25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
