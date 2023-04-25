@@ -4,28 +4,52 @@ html {
 body, h1, h2, h3, h4, h5, h6, p, blockquote {
   margin: 0;
 }
-ul li {
-  list-style: none;
+h1 {
+  border-bottom: 1px solid #cccccc;
+}
+ul {
 }
 th {
   font-weight: normal;
 }
 
 blockquote {
-  border-left: 2px solid black;
+  border-left: 4px solid black;
   padding: 4px;
-  padding-left: 8px;
+  padding-left: 12px;
+  color: #333333;
 }
 
 pre {
   background: #fcfaee;
 }
 
-code {
+code, .code {
   background-color: #eeeeee;
   color: brown;
   padding: 4px;
   font-weight: bold;
   font-family: monospace;
   border-radius: 2px;
+}
+
+/* ユーティリティクラス */
+.m_1 {
+  margin: 4px;
+}
+
+.m_2 {
+  margin: 8px;
+}
+
+.m_3 {
+  margin: 12px;
+}
+
+.m_4 {
+  margin: 16px;
+}
+
+.max_width_60 {
+  max-width: 60px;
 }
