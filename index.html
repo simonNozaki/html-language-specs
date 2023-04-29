@@ -17,20 +17,36 @@
   </head>
   <body>
     <main>
-      <header>
-        <nav>
-          <h2>参考</h2>
-          <ul>
-            <li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
-            <li><a href="https://www.amazon.co.jp/gp/product/4862465277/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1">HTML解体新書-仕様から紐解く本格入門</a></li>
-            <li><a href="https://developer.mozilla.org/ja/docs/Glossary/IDL">IDL</a></li>
-            <li><a href="./css.html">CSSの仕様</a></li>
-          </ul>
-        </nav>
-      </header>
       <h1>htmlの言語仕様 メモ</h1>
       <section>
-        <p>sectionには見出しを含めます。見出しを持たせないような囲みであれば、divで囲って代用します。</p>
+        <h2>内容モデル（Content model）</h2>
+        <p>ある要素がどのような要素に属することができるかは、ルールで決まっている。このルールのことを内容モデル(Content Model)と呼ぶ。</p>
+        内容モデルには以下のようなものがある:
+        <ul>
+          <li>Metdadata</li>
+          <li>Flow</li>
+          <li>Phrasing</li>
+          <li>Sectioning</li>
+          <li>Heading</li>
+          <li>Interactive</li>
+          <li>Embeded</li>
+        </ul>
+      </section>
+      <section>
+        <h3>セクショニング</h3>
+        sectionやnavを用いることで見出しに続くセクションを明示できる。
+        <section>
+          <h4>body</h4>          
+          html要素2番目の子で、文書の表示する内容を示す。セクショニングルートになる。一つのhtmlに一つまで。
+        </section>
+        <section>
+          <h4>section</h4>
+          一般的なセクションを表現する。通常見出し要素を置くが、それができない場合はdivで囲って代用する。
+        </section>
+        <section>
+          <h4>style</h4>
+          メタデータコンテンツ。metaやtitleと同じ内容モデルなので、`head`に置くことができる
+        </section>
       </section>
       <section>
         <h2>ブロックレベル要素とインラインレベル要素</h2>
@@ -173,7 +189,32 @@ const lazyMap = (arr, f) => {
           <h3>フォーム</h3>
           <p>ユーザが入力した情報をサーバに送信する機能があり、そのための要素が存在する。ユーザがテキストを入力するパーツをフォームコントロールと呼ぶ。</p>
         </section>
+        <section>
+          <h3>スクリプティング要素</h3>
+          <p>以前のブラウザはVBScriptが動くこともあったが、現在はJavaScriptの動作のみ想定されている。</p>
+          <section>
+            <h4>script</h4>
+            <p><code>script</code>はほとんどの要素の子要素になることができ、Meta、Flow、Phrasingのどれでもある。内容モデルは複雑で、src属性が指定されているときは非置換要素になる。</p>
+            <p>script要素は複雑な経緯を持っているため、srcで外部リソースを読み込んで使うようにする。</p>
+            <p>src属性で外部リソースを読み込む際、asyncやdeferを用いることで読み込みの遅延を実現できる。defer属性を指定すると、htmlの解析を優先してスクリプトのロードを遅延させる。</p>
+          </section>
+          <section>
+            <h4>noscript</h4>
+            <p>ブラウザのスクリプトが無効の場合のフォールバックコンテンツを提供する。スクリプトが有効なら無視される。</p>
+          </section>
+        </section>
       </section>
     </main>
+    <footer>
+      <nav>
+        <h2>参考</h2>
+        <ul>
+          <li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
+          <li><a href="https://www.amazon.co.jp/gp/product/4862465277/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1">HTML解体新書-仕様から紐解く本格入門</a></li>
+          <li><a href="https://developer.mozilla.org/ja/docs/Glossary/IDL">IDL</a></li>
+          <li><a href="./css.html">CSSの仕様</a></li>
+        </ul>
+      </nav>
+    </footer>
   </body>
 </html>
