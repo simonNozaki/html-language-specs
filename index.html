@@ -31,33 +31,48 @@
           <li>Interactive</li>
           <li>Embeded</li>
         </ul>
-      </section>
-      <section>
-        <h3>セクショニング</h3>
-        sectionやnavを用いることで見出しに続くセクションを明示できる。
+        たとえば、以下のようにspanの中にpを定義できないのはspanの内容モデルがPhrasingであるから。
+<pre>
+&lt;span&gt;
+  &lt;p&gt;
+    このネストはできない
+  &lt;/p&gt;
+&lt;/span&gt;
+</pre>
+        ウェブアプリケーションのマークアップによく用いられるdivやp、ulは<a href="https://momdo.github.io/html/dom.html#flow-content">Flowコンテンツ</a>。spanやstrong, codeといった段落内テキストを修飾するような要素は<a href="https://momdo.github.io/html/dom.html#phrasing-content-2">Phrasingコンテンツ</a>。
+        以下のようなマークアップはFlowコンテンツにPhrasingコンテンツが含まれる例ということになる。
+<pre>
+  &lt;p&gt;
+    &lt;span&gt;text&lt;/span&gt;
+  &lt;/p&gt;
+</pre>
         <section>
-          <h4>body</h4>          
-          html要素2番目の子で、文書の表示する内容を示す。セクショニングルートになる。一つのhtmlに一つまで。
+          <h3>補足: ブロックレベル要素とインラインレベル要素</h3>
+          <p>
+            ブロックレベル要素、インラインレベル要素はCSSの視覚要素レベルで、cssの <a href="https://momdo.github.io/css2/visuren.html">視覚整形モデル</a> とHTMLの内容モデルは本質的に異なる概念。
+            HTML5でレベル分類が一新され、HTML4でインライン要素とされていたものはPhrasingコンテンツとなった。ブロックレベル要素とされていたものはFlowコンテンツに相当するものの、
+            FlowやPhrasingも含むため1:1に対応しない。
+          </p>
         </section>
-        <section>
-          <h4>section</h4>
-          一般的なセクションを表現する。通常見出し要素を置くが、それができない場合はdivで囲って代用する。
-        </section>
-        <section>
-          <h4>style</h4>
-          メタデータコンテンツ。metaやtitleと同じ内容モデルなので、`head`に置くことができる
-        </section>
-      </section>
-      <section>
-        <h2>ブロックレベル要素とインラインレベル要素</h2>
-        <p>
-          ブロックレベル要素、インラインレベル要素はCSSの視覚要素レベルで、cssの <a href="https://momdo.github.io/css2/visuren.html">視覚整形モデル</a> とHTMLの内容モデルは本質的に異なる概念。
-          HTML5でレベル分類が一新され、HTML4でインライン要素とされていたものはPhrasingコンテンツとなった。ブロックレベル要素とされていたものはFlowコンテンツに相当するものの、
-          FlowやPhrasingも含むため1:1に対応しない。
-        </p>
       </section>
       <section>
         <h2>htmlの主要な要素</h2>
+        <section>
+          <h3>セクショニング</h3>
+          sectionやnavを用いることで見出しに続くセクションを明示できる。見出し要素(h1 - h6)が入っているFlowコンテンツは<code>section</code>を使わずともセクショニングされる。
+          <section>
+            <h4>body, header, footer</h4>
+            html要素2番目の子で、文書の表示する内容を示す。セクショニングルートになる。それぞれ、一つのhtmlに一つだけ含められる。
+          </section>
+          <section>
+            <h4>section</h4>
+            一般的なセクションを表現する。通常見出し要素を置くが、それができない場合はdivで囲って代用できる。
+          </section>
+          <section>
+            <h4>style</h4>
+            メタデータコンテンツ。metaやtitleと同じ内容モデルなので、`head`に置くことができる
+          </section>
+        </section>  
         <section>
           <h3>グルーピング</h3>
           <p>blockquoteはFlowコンテンツで、文字をそのまま置くこともできる。pで囲った文字列をそのまま置くこともできる。</p>
@@ -96,6 +111,7 @@ ul li {
           <p>テキストレベルセマンティクスはテキストをマークアップする用途で用いられ、すべてPhrasing contents。</p>
           <section>
             <h4>テキストマークアップの要素</h4>
+            テキストレベルで修飾する、Phrasingコンテンツのマークアップ例。すべて対応するHTMLタグでマークアップされている。
             <ul>
               <li><strong>太文字にする</strong></li>
               <li><em>強調</em></li>
@@ -136,6 +152,7 @@ const lazyMap = (arr, f) => {
           </section>
           <section>
             <h4>link要素</h4>
+            Metadataコンテンツで、終了タグがない、単独で存在できる要素。
             <ul>
               <li>
                 linkはaと異なり、html文書が参照するリソースとの関係を表現する要素。リンク先リソースの種類はrel属性で指定される。
@@ -147,6 +164,10 @@ const lazyMap = (arr, f) => {
                 多くの場合、relはhrefと一緒に用いてリンク先の実体とそれの種類を設定する。
               </li>
             </ul>
+            次の例は、HTMLリンクタイプを<code>stylesheet</code>にした典型的なマークアップ。
+<pre>
+  &lt;link rel="stylesheet" href="./style.css"&gt;
+</pre>            
           </section>
         </section>
         <section>
@@ -204,12 +225,42 @@ const lazyMap = (arr, f) => {
           </section>
         </section>
       </section>
+      <section>
+        <h2>属性、ARIA</h2>
+        <p>ARIA(Accesible Rich Internet Applications)属性は、アクテシビリティを向上させるための属性で、任意のマークアップ言語と組み合わせることができる。</p>
+        ARIA属性は、その特徴から3つに分類できる:
+        <ul>
+          <li>ロール</li>
+          <li>ステート</li>
+          <li>プロパティ</li>
+        </ul>
+        <section>
+          <h3>代表的なaria-*属性</h3>
+          <section>
+            <h4>aria-hidden[state]</h4>
+            <p>支援技術に存在しないことを伝える属性。意図しない、ないしは冗長な読み上げをスキップさせられる。</p>
+          </section>
+          <section>
+            <h4>aria-label[property]</h4>
+            <p>要素にアクセシブルな名前を与える。例えば、アイコンボタンなどテキストから文脈を伝えづらいケースでは与えた名前によってアクションが明瞭に伝わる。</p>
+          </section>
+          <section>
+            <h4>aria-labelledby[property]</h4>
+            <p>aria-labelと同様の働きをするが、aria-labelledbyは要素のIDを指定する。</p>
+          </section>
+          <section>
+            <h4>aria-haspopup</h4>
+            <p>属性が指定された要素にポップアップがあることを伝える。視覚的にしかわからないドロップダウンの存在を提示できる。</p>
+          </section>
+        </section>
+      </section>
     </main>
     <footer>
       <nav>
         <h2>参考</h2>
         <ul>
           <li><a href="https://html.spec.whatwg.org/multipage/">HTML Living standard</a></li>
+          <li><a href="https://github.com/whatwg/html">WHATWG/HTML | GitHub</a></li>
           <li><a href="https://www.amazon.co.jp/gp/product/4862465277/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1">HTML解体新書-仕様から紐解く本格入門</a></li>
           <li><a href="https://developer.mozilla.org/ja/docs/Glossary/IDL">IDL</a></li>
           <li><a href="./css.html">CSSの仕様</a></li>
